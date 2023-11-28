@@ -18,13 +18,12 @@ function App() {
 
   const [color, setcolor] = useState('#fff');
   const [colorName, setcolorName] = useState("Select Color");
-  let radio_btn = document.getElementById("flexSwitchCheckDefault");
-
-
+  
+  
   function changeTheme() {
     if (color === '#fff') {
       setcolor('#212529');
-
+      
       // For changing the body background
       document.body.style.background = '#2b2f32'
       showAlert("Dark Mode Has Been enabled", "success");
@@ -35,30 +34,31 @@ function App() {
       document.body.style.background = '#fff'
       showAlert("Light Mode Has Been enabled", "success");
     }
-
+    
     console.log(color);
     setcolorName("Select Color");
   }
-
-
-
+  
+  
+  
   const [alert, setalert] = useState(null);
-
+  
   function showAlert(message, type) {
     setalert({
       message: message,
       type: type
     });
-
+    
     setTimeout(() => {
       setalert(null);
     }, 1800);
   }
-
-
-
-
+  
+  
+  
+  
   const changeColorTheme = (event) => {
+    let radio_btn = document.getElementById("flexSwitchCheckDefault");
     console.log(event.target.id);
 
     let colorbtn = event.target.id;
@@ -87,7 +87,8 @@ function App() {
       document.body.style.background = '#FCC911';
     }
 
-    radio_btn.checked = "loda";
+    
+    radio_btn.checked = "True";
 
   }
 
