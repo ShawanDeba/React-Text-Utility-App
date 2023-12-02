@@ -8,12 +8,15 @@ const AlertComponent = (props) => {
     }
     
     return (
-        // this && is used to make is work : return only is both are not null   
-        props.alertProp && <div className = "container d-flex justify-content-center ">
-            <div class={`alert alert-${props.alertProp.type} col-sm-6 mt-5" role="alert`}>
+        // this && is used to make is work : return only is both are not null 
+         <div style={{height:'50px'}}>
+
+        {props.alertProp && <div className = "d-flex justify-content-center">
+            <div class={`alert alert-${props.alertProp.type} col-sm-6 w-100" role="alert`}>
                 {capitalize(props.alertProp.type)} : {props.alertProp.message}
             </div>
-        </div>
+        </div>}
+        </div>  
     )
 }
 

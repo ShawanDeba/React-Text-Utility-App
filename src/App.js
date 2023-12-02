@@ -5,7 +5,6 @@ import TextForm from './components/TextForm';
 import React, { useState } from 'react';
 import AlertComponent from './components/AlertComponent';
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
   HashRouter

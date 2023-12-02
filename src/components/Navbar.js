@@ -19,6 +19,7 @@ const Navbar = (props) =>
 
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
           <li className="nav-item">
+            {/* use link istead of anchor to work with react touter dom */}
             <Link className="nav-link active" aria-current="page" to="/" style={{color:`${props.colorProp === '#fff'||props.colorProp==='#D9AA02' ? '#000000' : '#fff'}`}}>Home</Link>
           </li>
 
@@ -27,13 +28,7 @@ const Navbar = (props) =>
           </li>
         </ul>
 
-        <form className="d-flex " role="search">
-          <input className="form-control me-2 form-dark bg-ark" type="search" placeholder="Search" aria-label="Search" />
-          <button className="btn btn-outline-success" type="submit">Search</button>
-        </form>
-
-
-        <div className="dropdown mx-4">
+        <div className="dropdown my-2 me-3">
           <button className="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" >
           {`${props.colorNameProp}`}
           </button>

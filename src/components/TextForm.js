@@ -9,7 +9,6 @@ export default function TextForm(props) {
     const changeText = (event) => {
         setText(event.target.value);
         console.log("text area changed");
-
     }
 
     // function to change the text using the button
@@ -38,7 +37,7 @@ export default function TextForm(props) {
 
     const clear_text = () => {
         if (document.getElementById('textbox').value === "")
-            alert("Please Enter Some Text");
+            props.showAlertProp("Please Enter Some Text", "danger");
 
         else {
             setText("");
@@ -49,7 +48,7 @@ export default function TextForm(props) {
 
     const capitalizefirst_text = () => {
         if (document.getElementById('textbox').value === "")
-            alert("Please Enter Some Text");
+            props.showAlertProp("Please Enter Some Text", "danger");
 
         else {
 
@@ -73,6 +72,7 @@ export default function TextForm(props) {
         else {
             textbox.select();
             navigator.clipboard.writeText(text);
+            document.getSelection().removeAllRanges();
             props.showAlertProp("Text Copied", "success")
         }
     }
@@ -97,31 +97,13 @@ export default function TextForm(props) {
         this is how you change a variable in React, 
         we are declaring a variable TEXT and then passing it to the value of TEXTAREA
     */
-    let [text, setText] = useState();
+    let [text, setText] = useState("");
     console.log("text:" + text);
     // console.log("text:" + textbox.value);
 
 
     // setText("hello world"); // setText is a function which is used to change the value of text
     // text = "hello world"; // we can't change like this
-
-
-    let number_of_words = 0;
-
-    if (text !== undefined && text !== "") {
-
-        text.split(" ").forEach(element => {
-            if (element !== "")
-                number_of_words++;
-
-        });
-
-
-        // Same Function for characters
-        // let newText = text.split(/[ ]+/);
-        // newText = newText.join(" ");
-        // number_of_characters = newText.length;
-    }
 
 
 
@@ -137,22 +119,22 @@ export default function TextForm(props) {
                 <textarea className="form-control" value={text} onChange={changeText} id="textbox" rows="8" style={{ backgroundColor: `${props.colorProp}`, color: `${props.colorProp === '#fff' || props.colorProp === '#D9AA02'? '#000000' : '#fff'}` }}></textarea>
             </div>
 
-            <button className="btn btn-primary " onClick={changeUpperCase}>Convert To Uppercase</button>
-            <button className="btn btn-primary mx-3" onClick={changeLowerCase}>Convert To Lowercase</button>
-            <button className="btn btn-primary mx-3" onClick={clear_text}>Clear</button>
-            <button className="btn btn-primary mx-3" onClick={capitalizefirst_text}>Capitalize First Letter</button>
-            <button className="btn btn-primary mx-3" onClick={copyToClipboard}>Copy To Clipboard</button>
-            <button className="btn btn-primary mx-3" onClick={removeExtraSpace}>Remove Extra Space</button>
+            <button className="btn btn-primary mx-1 my-1"  disabled={text.length===0}  onClick={changeUpperCase}>Convert To Uppercase</button>
+            <button className="btn btn-primary mx-1 my-1"  disabled={text.length===0} onClick={changeLowerCase}>Convert To Lowercase</button>
+            <button className="btn btn-primary mx-1 my-1"   onClick={clear_text}>Clear</button>
+            <button className="btn btn-primary mx-1 my-1"  disabled={text.length===0} onClick={capitalizefirst_text}>Capitalize First Letter</button>
+            <button className="btn btn-primary mx-1 my-1"  disabled={text.length===0} onClick={copyToClipboard}>Copy To Clipboard</button>
+            <button className="btn btn-primary mx-1 my-1"   onClick={removeExtraSpace}>Remove Extra Space</button>
 
             <div className={`text-summary my-4 border border-primary p-3 mb-4 border-4 rounded border-opacity-50`} style={{ backgroundColor: `${props.colorProp}`, color: `${props.colorProp === '#fff' || props.colorProp === '#D9AA02' ? '#000000' : '#fff'}` }}>
                 <h2>Text Summary</h2>
-                <p>Number Of Words : {text === undefined || text === "" ? 0 : number_of_words}</p>
+                <p>Number Of Words : {text.split(" ").filter(ele=>ele!=="").length}</p>
 
                 <p>Number Of Characters : {text === undefined ? 0 : text.length}</p>
-                <p>Reading Time : {text === undefined || text === "" ? 0 : number_of_words * 0.008}</p>
+                <p>Reading Time : {text.split(" ").filter(ele=>ele!=="").length * 0.008}</p>
 
                 <h2>Preview</h2>
-                <p>{text}</p>
+                <p>{text.length===0?"Nothing To Preview": text}</p>
             </div>
 
         </div>
